@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>الأعضاء</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial;direction:rtl;background:#f1f1f1;padding:20px;}
+.card{
+  background:white;
+  padding:15px;
+  border-radius:8px;
+  margin-bottom:10px;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<h3>قائمة الأعضاء</h3>
+<div id="list"></div>
+<a href="index.html">⬅ رجوع</a>
+
+<script>
+let members = JSON.parse(localStorage.getItem("members") || "[]");
+let list = document.getElementById("list");
+
+members.forEach((m,i)=>{
+  list.innerHTML += `
+  <div class="card" onclick="openProfile(${i})">
+    <b>${m.name}</b><br>
+    رقم: ${m.number}<br>
+    تاريخ الانتساب: ${m.date}
+  </div>`;
+});
+
+function openProfile(index){
+  localStorage.setItem("currentMember", index);
+  window.location.href = "profile.html";
+}
+</script>
+
+</body>
+</html>

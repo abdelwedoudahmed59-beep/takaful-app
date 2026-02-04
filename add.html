@@ -1,0 +1,24 @@
+<input id="name" placeholder="الاسم الكامل">
+<input id="number" placeholder="رقم العضو">
+<input type="date" id="date">
+<input type="file" id="photo" accept="image/*">
+<script>
+function save(){
+  let members = JSON.parse(localStorage.getItem("members") || "[]");
+
+  let reader = new FileReader();
+  reader.onload = function(){
+    members.push({
+      name: name.value,
+      number: number.value,
+      date: date.value,
+      photo: reader.result,
+      subscriptions: [],
+      aids: []
+    });
+    localStorage.setItem("members", JSON.stringify(members));
+    alert("تمت الإضافة بنجاح");
+  };
+  if(photo.files[0]) reader.readAsDataURL(photo.files[0]);
+}
+</script>
